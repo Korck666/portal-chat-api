@@ -22,7 +22,24 @@
 	// "features": {},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [8000]
+	"forwardPorts": [
+		8000
+	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-azuretools.vscode-docker",
+				"DotJoshJohnson.xml",
+				"RandomFractalsInc.vscode-data-table",
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"esbenp.prettier-vscode",
+				"oderwat.indent-rainbow",
+				"GitHub.copilot",
+				"DavidAnson.vscode-markdownlint"
+			]
+		}
+	}
 
 	// Uncomment the next line if you want start specific services in your Docker Compose config.
 	// "runServices": [],
