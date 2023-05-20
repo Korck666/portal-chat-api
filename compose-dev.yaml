@@ -2,8 +2,7 @@ services:
   api:
     build:
       context: .
-      target: dev-envs
-    container_name: fastapi-application
+    container_name: portal-chat-api
     environment:
       PORT: 8000
     ports:
