@@ -29,8 +29,6 @@
 		"vscode": {
 			"extensions": [
 				"ms-azuretools.vscode-docker",
-				"DotJoshJohnson.xml",
-				"RandomFractalsInc.vscode-data-table",
 				"ms-python.python",
 				"ms-python.vscode-pylance",
 				"esbenp.prettier-vscode",
@@ -41,11 +39,10 @@
 				"eamodio.gitlens",
 				"ms-vscode-remote.remote-wsl",
 				"ms-vscode.remote-server",
-				"golang.go",
-				"ms-toolsai.jupyter-renderers",
-				"ms-toolsai.vscode-jupyter-cell-tags",
-				"ms-toolsai.jupyter",
-				"akamud.vscode-theme-onedark"
+				"akamud.vscode-theme-onedark",
+				"bierner.markdown-image-size",
+				"github.vscode-github-actions",
+				"DotJoshJohnson.xml"
 			]
 		}
 	}
