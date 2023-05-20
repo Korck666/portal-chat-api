@@ -12,7 +12,7 @@ ARG PORT=8000
 LABEL key="portal-chat-api"
 
 COPY requirements.txt /tmp/requirements.txt
-RUN pip install --no-cache-dir -r /tmp/requirements.txt
+RUN pip install --upgrade pip && pip install --no-cache-dir -r /tmp/requirements.txt
 
 EXPOSE ${PORT}
 
