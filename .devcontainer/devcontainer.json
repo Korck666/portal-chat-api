@@ -36,7 +36,10 @@
 				"esbenp.prettier-vscode",
 				"oderwat.indent-rainbow",
 				"GitHub.copilot",
-				"DavidAnson.vscode-markdownlint"
+				"DavidAnson.vscode-markdownlint",
+				"GitHub.vscode-pull-request-github",
+				"eamodio.gitlens",
+				"ms-vscode-remote.remote-wsl"
 			]
 		}
 	}
