@@ -39,7 +39,13 @@
 				"DavidAnson.vscode-markdownlint",
 				"GitHub.vscode-pull-request-github",
 				"eamodio.gitlens",
-				"ms-vscode-remote.remote-wsl"
+				"ms-vscode-remote.remote-wsl",
+				"ms-vscode.remote-server",
+				"golang.go",
+				"ms-toolsai.jupyter-renderers",
+				"ms-toolsai.vscode-jupyter-cell-tags",
+				"ms-toolsai.jupyter",
+				"akamud.vscode-theme-onedark"
 			]
 		}
 	}
