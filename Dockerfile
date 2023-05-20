@@ -9,7 +9,6 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     pip install -r requirements.txt
 
 COPY ./app ./app
-COPY ./services ./services
 
 FROM builder as dev-envs
 
