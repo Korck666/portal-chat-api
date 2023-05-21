@@ -31,7 +31,6 @@
 				"ms-azuretools.vscode-docker",
 				"ms-python.python",
 				"ms-python.vscode-pylance",
-				"esbenp.prettier-vscode",
 				"oderwat.indent-rainbow",
 				"GitHub.copilot",
 				"DavidAnson.vscode-markdownlint",
@@ -42,7 +41,8 @@
 				"akamud.vscode-theme-onedark",
 				"bierner.markdown-image-size",
 				"github.vscode-github-actions",
-				"DotJoshJohnson.xml"
+				"DotJoshJohnson.xml",
+				"ms-python.autopep8"
 			]
 		}
 	}

@@ -1,8 +1,7 @@
-# database.py
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
+# app/engine/database.py
+from database_descriptor import DatabaseDescriptor
 class Database:
+    
     _instance = None
 
     @staticmethod
@@ -11,6 +10,15 @@ class Database:
             Database._instance = Database()
         return Database._instance
 
-    def __init__(self):
-        self.engine = create_engine('postgresql://user:password@localhost/dbname')
-        self.Session = sessionmaker(bind=self.engine)
+    def __init__(self, db):
+        self.db = Database()
+
+    def connect(self):
+        self.db.connect()
+
+    def disconnect(self):
+        self.db.disconnect()
+
+    def query(self, query):
+        return self.db.query(query)
+
