@@ -2,9 +2,22 @@ services:
   api:
     build:
       context: .
+      dockerfile: Dockerfile
+      args:
+        #use .env to load environment variables
+        - CHAT_SERVICE_URL=${CHAT_SERVICE_URL}
+        - OPENAI_API_KEY=${OPENAI_API_KEY}
+        - OPENAI_ORG_ID=${OPENAI_ORG_ID}
+        - PINECONE_API_KEY=${PINECONE_API_KEY}
+        - PINECONE_ENVIRONMENT=${PINECONE_ENVIRONMENT}
+        - PINECONE_INDEX_MASTER=${PINECONE_INDEX_MASTER}
+        - PINECONE_INDEX_NAMESPACE_GAME_SYSTEMS=${PINECONE_INDEX_NAMESPACE_GAME_SYSTEMS}
+        - PORT=${PORT}
     container_name: portal-chat-api
     environment:
       PORT: 8000
+    expose:
+      - 8000
     ports:
       - '8000:8000'
     volumes:
