@@ -2,11 +2,11 @@ from fastapi import FastAPI, Depends
 from pydantic import BaseModel
 import os
 import openai
-import pinecone
+
+set_key = lambda s: os.getenv(s) if os.getenv(s) is not None else ""
 
 # Initialize OpenAI and Pinecone
-openai.api_key = os.getenv("OPENAI_API_KEY")
-pinecone.init(api_key=os.getenv("PINECONE_API_KEY"))
+openai.api_key = set_key("OPENAI_API_KEY")
 
 # Create FastAPI instance
 app = FastAPI()
@@ -25,9 +25,8 @@ def chat_endpoint(chat_input: ChatInput):
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": chat_input.message},
-        ],
+        ]
     )
-    response_message = openai_response['choices'][0]['message']['content']
-
+    response_message = openai_response.choices[0].message # type: ignore
     # Return the response
     return ChatOutput(response=response_message)
