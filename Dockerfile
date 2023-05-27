@@ -1,4 +1,4 @@
-FROM tiangolo/uvicorn-gunicorn:python3.11
+FROM tiangolo/uvicorn-gunicorn:python3.10-slim
 
 ARG CHAT_SERVICE_URL="http://0.0.0.0:8000"
 ARG OPENAI_API_KEY=""
@@ -12,8 +12,9 @@ ARG PORT=8000
 LABEL key="portal-chat-api"
 
 COPY requirements.txt /tmp/requirements.txt
-RUN pip install --upgrade pip && pip install --no-cache-dir -r /tmp/requirements.txt
-
+RUN pip install --upgrade pip && pip install --no-cache-dir -r /tmp/requirements.txt && \
+    apt-get update && apt-get install -y git
+    
 EXPOSE ${PORT}
 
 ENV CHAT_SERVICE_URL=${CHAT_SERVICE_URL}
