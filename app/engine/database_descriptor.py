@@ -1,11 +1,12 @@
-# database_descriptor.py
+# app/engine/database_descriptor.py
 from app.engine.database_type import DatabaseType
+import Configuration
 
 # this class should contain all the information needed to create a database instance
 class DatabaseDescriptor:
     def __init__(self, db_type: DatabaseType, host: str, port: int, user: str, environment: str,
                  db_name: str, password: str, api_key: str, namespace: str = 'default', log_level: str = 'INFO',
-                 config: str = '', openapi_config: str = '', *args, **kwargs):
+                 config: str = '', openapi_config: Configuration = {}, *args, **kwargs):
 
         self.db_type = db_type
         self.host = host

@@ -1,5 +1,5 @@
 # app/engine/database.py
-from database_descriptor import DatabaseDescriptor
+from app.engine.database_descriptor import DatabaseDescriptor
 
 
 class Database:

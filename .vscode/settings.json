@@ -22,6 +22,8 @@
   },
   "workbench.colorCustomizations": 
   {
+    "editor.selectionBackground": "#56b5c2b9",
+    "editor.selectionHighlightBorder": "#c07676",
     "tab.activeBackground": "#282c34",
     "activityBar.background": "#282c34",
     "sideBar.background": "#021335",
@@ -147,6 +149,32 @@
   "terminal.integrated.fontWeightBold": "normal",
   "terminal.integrated.fontWeight": "normal",
   "terminal.integrated.letterSpacing": 0,
-  "terminal.explorerKind": "external"
+  // "terminal.explorerKind": "external"
+  "terminal.explorerKind": "both",
+  "terminal.integrated.profiles.linux": {
 
+      "bash": {
+          "path": "bash",
+          "icon": "terminal-bash"
+      },
+      "zsh": {
+          "path": "zsh",
+          "icon": "terminal-ubuntu"
+      },
+      "fish": {
+          "path": "fish",
+          "icon": "terminal-debian"
+      },
+      "tmux": {
+          "path": "tmux",
+          "icon": "terminal-tmux"
+      },
+      "pwsh": {
+          "path": "pwsh",
+          "icon": "terminal-powershell"
+      }
+  },
+  "git.enableSmartCommit": true,
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "python.formatting.provider": "none"
 }

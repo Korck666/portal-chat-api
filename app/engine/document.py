@@ -1,5 +1,5 @@
 # document.py
-from abc import ABC, abstractmethod
+from document_descriptor import DocumentDescriptor
 class Document:
     _instances = {}
 

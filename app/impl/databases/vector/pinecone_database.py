@@ -1,17 +1,18 @@
-# app/impl/pinecone_database.py
+# app/impl/databases/vector/pinecone_database.py
 from abc import abstractmethod
 from typing import List
 import pinecone
 from app.engine.vector_database import VectorDatabase
 from app.engine.document import Document
 from app.engine.database_descriptor import DatabaseDescriptor
+from app.impl.databases.vector.descriptors.pinecone_descriptor import PineconeDescriptor
 
 
 class PineconeDatabase(VectorDatabase):
+    pinecone_descriptor: PineconeDescriptor
     def __init__(self, descriptor: DatabaseDescriptor):
         super().__init__(descriptor)
-        self.pinecone_descriptor = PineconeVectorDatabase.from_database_descriptor(
-            descriptor)
+        self.pinecone_descriptor = PineconeDescriptor.from_database_descriptor(descriptor)
 
     @classmethod
     def create_instance(cls, descriptor):
@@ -19,8 +20,17 @@ class PineconeDatabase(VectorDatabase):
 
     @abstractmethod
     def connect(self):
-        pinecone.init(
-            **PineconeVectorDatabase.from_database_descriptor(self.descriptor))
+        # unpack the descriptor into the pinecone client
+
+        pinecone.init(api_key=self.pinecone_descriptor.api_key,
+                      environment=self.pinecone_descriptor.environment,
+                      host=self.pinecone_descriptor.host,
+                      project_name=self.pinecone_descriptor.project_name,
+                      log_level=self.pinecone_descriptor.log_level,
+                      openapi_config=self.pinecone_descriptor.openapi_config,
+                      config=self.pinecone_descriptor.config,
+                      **self.pinecone_descriptor.kwargs
+                      )
         if self.pinecone_descriptor.index_name not in pinecone.list_indexes():
             raise ValueError(f"Index {self.index_name} not found.")
         self.index = pinecone.Index(index_name=self.index_name)
