@@ -27,6 +27,143 @@
 	],
 	"customizations": {
 		"vscode": {
+			"[python]": 
+			{
+			  "editor.defaultFormatter": "ms-python.autopep8",
+			  "editor.formatOnSave": true,
+			  "editor.codeActionsOnSave": 
+			  {
+				"source.organizeImports": true
+			  },
+			  "editor.formatOnType": true,
+			  "editor.formatOnPaste": true,
+			  "editor.tabSize": 4,
+			  "editor.insertSpaces": true,
+			  "editor.detectIndentation": true,
+			},
+			"workbench.colorCustomizations": 
+			{
+			  "tab.activeBackground": "#282c34",
+			  "activityBar.background": "#282c34",
+			  "sideBar.background": "#021335",
+			  "sideBarSectionHeader.background": "#021335",
+			  "sideBarTitle.foreground": "#56b6c2",
+			  "terminal.foreground": "#e5c07b",
+			  "terminalCommandDecoration.errorBackground": "#e06c75",
+			  "terminal.background": "#021335",
+			  "terminal.selectionForeground": "#06e23a",
+			  "terminalCursor.background": "#021335",
+			  "terminalCursor.foreground": "#e5c07b",
+			  "terminal.ansiBlack": "#282c34",
+			  "terminal.ansiBlue": "#61afef",
+			  "terminal.ansiBrightBlack": "#5c6370",
+			  "terminal.ansiBrightBlue": "#61afef",
+			  "terminal.ansiBrightCyan": "#56b6c2",
+			  "terminal.ansiBrightGreen": "#98c379",
+			  "terminal.ansiBrightMagenta": "#c678dd",
+			  "terminal.ansiBrightRed": "#e06c75",
+			  "terminal.ansiBrightWhite": "#ffffff",
+			  "terminal.ansiBrightYellow": "#e5c07b",
+			  "terminal.ansiCyan": "#56b6c2",
+			  "terminal.ansiGreen": "#98c379",
+			  "terminal.ansiMagenta": "#c678dd",
+			  "terminal.ansiRed": "#e06c75",
+			  "terminal.ansiWhite": "#ffffff",
+			  "terminal.ansiYellow": "#e5c07b",
+			},
+			"editor.tokenColorCustomizations": 
+			{
+			  "textMateRules": 
+			  [
+				{
+				  "scope": 
+				  [
+					// the following elements will be in italic
+					"comment",
+					"storage.modifier", // static keyword
+					"storage.type.php", // typehints in methods keyword
+					"keyword.other.new.php", // new
+					"entity.other.attribute-name", // html attributes
+					"fenced_code.block.language.markdown", // markdown language modifier
+					"keyword", //import, export, return…
+					"storage.modifier", //static keyword
+					"storage.type", //class keyword
+					"keyword.control",
+					"constant.language",
+					"entity.other.attribute-name",
+					"entity.name.method",
+					"keyword.control.import.ts",
+					"keyword.control.import.py",
+					"keyword.control.import.ipynb",
+					"keyword.control.import.tsx",
+					"keyword.control.import.js",
+					"keyword.control.flow.js",
+					"keyword.control.flow.py",
+					"keyword.control.flow.ipynb",
+					"keyword.control.from.js",
+					"keyword.control.from.py",
+					"keyword.control.from.ipynb",
+					"keyword.control.from.ts",
+					"keyword.control.from.tsx"
+				  ],
+				  "settings": 
+				  {
+					"fontStyle": "italic"
+				  }
+				},
+				{
+				  "scope": 
+				  [
+					// the following elements will be displayed in bold
+					"entity.name.type.class" // class names
+				  ],
+				  "settings": 
+				  {
+					"fontStyle": ""
+				  }
+				},
+				{
+				  "scope": 
+				  [
+					// the following elements will be displayed in bold and italic
+					"entity.name.section.markdown" // markdown headlines
+				  ],
+				  "settings": 
+				  {
+					"fontStyle": "italic"
+				  }
+				},
+				{
+				  "scope": 
+				  [
+					// the following elements will be excluded from italics
+					//   (VSCode has some defaults for italics)
+					"invalid",
+					"keyword.operator",
+					"constant.numeric.css",
+					"keyword.other.unit.px.css",
+					"constant.numeric.decimal.js",
+					"constant.numeric.json",
+					"comment.block",
+					"entity.other.attribute-name.class.css"
+				  ],
+				  "settings": 
+				  {
+					"fontStyle": ""
+				  }
+				}
+			  ]
+			},    
+			"terminal.integrated.drawBoldTextInBrightColors": true,
+			"terminal.integrated.fontFamily": "monospace",
+			"terminal.integrated.fontSize": 13,
+			"terminal.integrated.lineHeight": 1,
+			"terminal.integrated.cursorStyle": "block",
+			"terminal.integrated.cursorBlinking": true,
+			"terminal.integrated.cursorWidth": 1,
+			"terminal.integrated.fontWeightBold": "normal",
+			"terminal.integrated.fontWeight": "normal",
+			"terminal.integrated.letterSpacing": 0,
 			"extensions": [
 				"ms-azuretools.vscode-docker",
 				"ms-python.python",
@@ -44,7 +181,7 @@
 				"ms-python.autopep8"
 			]
 		}
-	}
+	},
 
 	// Uncomment the next line if you want start specific services in your Docker Compose config.
 	// "runServices": [],
@@ -53,7 +190,7 @@
 	// "shutdownAction": "none",
 
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "cat /etc/os-release",
+	"postCreateCommand": "postcommand.sh"
 
 	// Configure tool-specific properties.
 	// "customizations": {},

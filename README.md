@@ -31,4 +31,4 @@ Following, please find some more guidelines that we need to implement into autom
 
 5. **Test Your Code**: Write tests for your code to ensure it behaves as expected. This is especially important when working with complex systems like AI and databases. (*We need to decide for a good Python framework here ASAP)
 
-6. **DO NOT Document Your Code**: Make sure to write clear CODE which makes comments and documentation for your code meaningless! This will make it easier for others (and the future you) to understand what your code is doing and certainly will mean a much better code. Remember, we read code in a proportion around a 10:1 in relation to writing, so make it readable.
+6. **Document Your Code**: Make sure to write clear CODE which makes comments and documentation for your code meaningless, but even that do comment whenever you feel it makes sense! This will make it easier for others (and the future you) to understand what your code is doing and certainly will mean a much better code. Remember, we read code in a proportion around a 10:1 in relation to writing, so make it readable.
