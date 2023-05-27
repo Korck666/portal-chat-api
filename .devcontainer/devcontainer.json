@@ -39,7 +39,7 @@
 			  "editor.formatOnPaste": true,
 			  "editor.tabSize": 4,
 			  "editor.insertSpaces": true,
-			  "editor.detectIndentation": true,
+			  "editor.detectIndentation": true
 			},
 			"workbench.colorCustomizations": 
 			{
@@ -69,7 +69,7 @@
 			  "terminal.ansiMagenta": "#c678dd",
 			  "terminal.ansiRed": "#e06c75",
 			  "terminal.ansiWhite": "#ffffff",
-			  "terminal.ansiYellow": "#e5c07b",
+			  "terminal.ansiYellow": "#e5c07b"
 			},
 			"editor.tokenColorCustomizations": 
 			{
@@ -165,6 +165,7 @@
 			"terminal.integrated.fontWeight": "normal",
 			"terminal.integrated.letterSpacing": 0,
 			"extensions": [
+				"ms-python.autopep8",
 				"ms-azuretools.vscode-docker",
 				"ms-python.python",
 				"ms-python.vscode-pylance",
@@ -190,7 +191,7 @@
 	// "shutdownAction": "none",
 
 	// Uncomment the next line to run commands after the container is created.
-	"postCreateCommand": "postcommand.sh"
+	"postCreateCommand": "/workspaces/${localWorkspaceFolderBasename}/app/scripts/postcommand.sh"
 
 	// Configure tool-specific properties.
 	// "customizations": {},

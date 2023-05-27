@@ -146,5 +146,7 @@
   "terminal.integrated.cursorWidth": 1,
   "terminal.integrated.fontWeightBold": "normal",
   "terminal.integrated.fontWeight": "normal",
-  "terminal.integrated.letterSpacing": 0
+  "terminal.integrated.letterSpacing": 0,
+  "terminal.explorerKind": "external"
+
 }
