@@ -42,7 +42,8 @@
 				"DotJoshJohnson.xml",
 				"GitHub.copilot-chat",
 				"GitHub.copilot-nightly",
-				"ms-python.autopep8"
+				"ms-python.autopep8",
+				"ms-edgedevtools.vscode-edge-devtools"
 			]
 		}
 	},

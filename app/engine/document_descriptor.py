@@ -5,8 +5,8 @@
 
 from app.engine.document_type import DocumentType
 from app.engine.log_level import LogLevel
+from app.engine.configuration import Configuration
 from dataclasses import dataclass
-import Configuration
 
 @dataclass
 class DocumentDescriptor:

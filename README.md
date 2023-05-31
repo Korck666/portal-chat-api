@@ -1,8 +1,7 @@
 # portal-chat-api
 
-<!-- ![PORTAL CHAT API](./app/img/logo_rpg_portal.png "PORTAL CHAT API") -->
-
-<img src="./app/img/logo_rpg_portal.png" alt="MarineGEO circle logo" style="height: 100px; width:100px;"/>
+<!-- ![PORTAL CHAT API](./static/logo_rpg_portal.png "PORTAL CHAT API") -->
+<img src="./app/static/logo_rpg_portal.png" alt="MarineGEO circle logo" style="height: 100px; width:100px;"/>
 
 ## READ AND USE IT TO GET HELP FROM CHATGPT AND GITHUB COPILOT
 

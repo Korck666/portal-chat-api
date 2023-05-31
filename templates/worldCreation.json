@@ -1,0 +1,50 @@
+{
+    "World": "The location or world where the adventure takes place.",
+    "AdventureHook": {
+      "Description": "A container field for elements related to the story's adventure hook.",
+      "Start": "The initial event that sets the story in motion and motivates the characters to begin their quest.",
+      "Problems": [
+        {
+          "Description": "An array of objects, each detailing a particular problem or conflict in the story.",
+          "Name": "The title or name of the problem.",
+          "ProblemDescription": "A brief description of the problem, providing some background and its traits.",
+          "Solution": "A potential solution to the problem that players can pursue."
+        }
+      ]
+    },
+    "WorldBuilding": {
+      "Description": "A container field providing more detailed information about the world setting.",
+      "WorldDescription": "An overview of the world's landscape and geographical features.",
+      "History": "The historical events and developments that have shaped the world.",
+      "Culture": "The customs, traditions, social norms, and beliefs of the world's inhabitants.",
+      "Landmarks": "Notable locations, monuments, or geographical features within the world."
+    },
+    "Players": [
+      {
+        "Description": "An array of objects, each representing a player in the game.",
+        "Name": "The name of the player.",
+        "PlayerDescription": "A brief description of who the player is, providing some background and character traits.",
+        "Race": "The race of the player's character in the game.",
+        "Class": "The class or profession of the player's character.",
+        "Level": "The current level of the player's character.",
+        "Inventory": [
+          {
+            "Description": "An array of objects, each representing an item in the player's inventory.",
+            "Name": "The name of the item.",
+            "ItemDescription": "A brief description of the item, providing some background and its traits.",
+            "Quantity": "The quantity of the item the player currently has."
+          }
+        ],
+        "Equipment": [
+          {
+            "Description": "An array of objects, each representing a piece of equipment the player's character is using.",
+            "Name": "The name of the item.",
+            "ItemDescription": "A brief description of the item, providing some background and its traits.",
+            "Quantity": "The quantity of the item the player currently has.",
+            "Type": "The type or category of the item (e.g., weapon, armor, tool, etc.)."
+          }
+        ]
+      }
+    ]
+  }
+  
