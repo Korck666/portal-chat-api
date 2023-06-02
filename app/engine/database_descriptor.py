@@ -1,36 +1,46 @@
 # app/engine/database_descriptor.py
 from app.engine.database_type import DatabaseType
-import Configuration
+from app.engine.descriptor import Descriptor
+from app.engine.log_level import LogLevel
 
 # this class should contain all the information needed to create a database instance
-class DatabaseDescriptor:
-    def __init__(self, db_type: DatabaseType, host: str, port: int, user: str, environment: str,
-                 db_name: str, password: str, api_key: str, namespace: str = 'default', log_level: str = 'INFO',
-                 config: str = '', openapi_config: Configuration = {}, *args, **kwargs):
 
+
+class DatabaseDescriptor(Descriptor):
+
+    def __init__(self, db_type: DatabaseType, host: str, port: int, user: str,
+                 environment: str, db_name: str, password: str, api_key: str,
+                 namespace: str = 'default', config: str = '', openapi_config: dict = {},
+                 log_level: LogLevel = LogLevel.INFO, args: tuple = (), kwargs: dict = {}) -> None:
+        super().__init__(log_level=log_level)
         self.db_type = db_type
         self.host = host
         self.port = port
         self.user = user
         self.environment = environment
-        self.password = password
         self.db_name = db_name
+        self.password = password
         self.api_key = api_key
         self.namespace = namespace
-        self.log_level = log_level
         self.config = config
         self.openapi_config = openapi_config
         self.args = args
         self.kwargs = kwargs
 
-        # we use hash to make sure that the descriptor is unique
-        # and can be used as a key in a dictionary
-        # this is important for the database factory
-        # which uses a dictionary to store the database instances
-        # and retrieve them by descriptor
-        # it is also a quick way to invalidate the cache
-        # if the descriptor changes
-        self.hash = hash((self.db_type, self.host, self.port,
-                          self.user, self.password, self.api_key,
-                          self.namespace, self.log_level, self.config,
-                          self.openapi_config, self.args, self.kwargs))
+    @staticmethod
+    def from_dict(db_dict: dict):
+        return DatabaseDescriptor(
+            db_type=db_dict['db_type': DatabaseType],
+            host=db_dict['host': str],
+            port=db_dict['port': int],
+            user=db_dict['user': str],
+            environment=db_dict['environment': str],
+            db_name=db_dict['db_name': str],
+            password=db_dict['password': str],
+            api_key=db_dict['api_key': str],
+            namespace=db_dict['namespace': str] | 'default',
+            log_level=db_dict['log_level': str] | 'INFO',
+            config=db_dict['config': str] | '',
+            openapi_config=db_dict['openapi_config': dict] | {},
+            args=db_dict['args': tuple] | (),
+            kwargs=db_dict['kwargs': dict] | {})
