@@ -3,3 +3,4 @@ uvicorn
 openai
 pinecone-client
 python-multipart
+pymongo

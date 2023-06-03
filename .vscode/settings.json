@@ -1,22 +1,14 @@
 {
-  "files.autoSave": "afterDelay",
-  "git.suggestSmartCommit": true,
-  "git.autofetch": true,
-  "git.confirmSync": false,
-  "git.ignoreRebaseWarning": true,
-  // "workbench.colorTheme": "One Dark Pro",
-  "python.analysis.typeCheckingMode": "basic",
   "[python]": {
     "editor.defaultFormatter": "ms-python.autopep8",
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
       "source.organizeImports": true
     },
-    "editor.formatOnType": true,
     "editor.formatOnPaste": true,
     "editor.tabSize": 4,
     "editor.insertSpaces": true,
-    "editor.detectIndentation": true,
+    "editor.detectIndentation": true
   },
   // "workbench.colorCustomizations": {
   //   // test comment
@@ -168,10 +160,43 @@
   //     "icon": "terminal-powershell"
   //   }
   // },
+  "files.autoSave": "afterDelay",
+  "git.suggestSmartCommit": true,
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.ignoreRebaseWarning": true,
   "git.enableSmartCommit": true,
-  "terminal.integrated.defaultProfile.linux": "zsh",
+  // "workbench.colorTheme": "One Dark Pro",
+  "python.analysis.typeCheckingMode": "basic",
   "python.formatting.provider": "none",
-  "workbench.colorCustomizations": {
-    
-  }
+  "python.languageServer": "Pylance",
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.diagnosticMode": "workspace",
+  "python.analysis.disableSemanticOnNoPython": false,
+  "python.analysis.enableSyncServer": true,
+  "python.analysis.inlayHints.callArgumentNames": true,
+  "python.analysis.inlayHints.functionReturnTypes": true,
+  "python.analysis.inlayHints.variableTypes": false,
+  "python.analysis.packageIndexDepths": [
+    {
+      "name": "sklearn",
+      "depth": 2
+    },
+    {
+      "name": "matplotlib",
+      "depth": 2
+    },
+    {
+      "name": "scipy",
+      "depth": 2
+    },
+    {
+      "name": "fastapi",
+      "depth": 2
+    },
+    {
+      "name": "flask",
+      "depth": 2
+    }
+  ]
 }

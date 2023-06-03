@@ -30,6 +30,7 @@
 			"extensions": [
 				"ms-azuretools.vscode-docker",
 				"ms-python.python",
+				"ms-python.autopep8",
 				"ms-python.vscode-pylance",
 				"oderwat.indent-rainbow",
 				"DavidAnson.vscode-markdownlint",
@@ -42,7 +43,6 @@
 				"DotJoshJohnson.xml",
 				"GitHub.copilot-chat",
 				"GitHub.copilot-nightly",
-				"ms-python.autopep8",
 				"ms-edgedevtools.vscode-edge-devtools",
 				"zhuangtongfa.Material-theme"
 			]

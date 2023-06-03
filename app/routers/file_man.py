@@ -1,6 +1,7 @@
 # routers/file_man.py
 import asyncio
-from fastapi import APIRouter
+from logging import Logger, raiseExceptions
+from fastapi import APIRouter, status
 from utils import config
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, JSONResponse
@@ -16,19 +17,23 @@ router.mount(f"{config.WORKDIR}/upload",
 
 
 async def save_file(file: UploadFile):
-    if file.filename.endswith('.pdf'):
-        with open(f"{config.WORKDIR}/upload/{file.filename}", "wb") as buffer:
-            while True:
-                # TODO: Add error handling, if chunk is too big, we can ajust the chunk size dinamically
-                # TODO: Add a progress bar
-                # TODO: Add error recovery retries
-                chunk = await file.read(config.FILE_CHUNCK[config.DEFAULT_FILE_CHUNCK_INDEX])
-                if not chunk:  # End of file
-                    break
-                buffer.write(chunk)
-    else:
+    try:
+        # TODO: Add a better check for file type
+        file_name: str = file.filename if file.filename is not None else ""
+        if file_name.endswith('.pdf'):
+            with open(f"{config.WORKDIR}/upload/{file.filename}", "wb") as buffer:
+                while True:
+                    chunk = await file.read(config.FILE_CHUNCK[config.DEFAULT_FILE_CHUNCK_INDEX])
+                    if not chunk:  # End of file
+                        break
+                    buffer.write(chunk)
+        else:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid file type. Only PDFs are accepted.")
+    except IOError as e:
+        Logger.error(e)
         raise HTTPException(
-            status_code=400, detail="Invalid file type. Only PDFs are accepted.")
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
 
 
 @router.get("/list_pdfs/")
