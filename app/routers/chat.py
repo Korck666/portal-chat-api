@@ -2,8 +2,8 @@
 from fastapi import APIRouter, Depends
 from services.auth import authenticate_api_key
 from utils import config
-from models.ChatInput import ChatInput
-from models.ChatOutput import ChatOutput
+from models.chat_input import ChatInput
+from models.chat_output import ChatOutput
 from services import openai
 
 router = APIRouter()

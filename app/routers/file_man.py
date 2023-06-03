@@ -9,6 +9,7 @@ from fastapi import UploadFile, HTTPException
 from typing import List
 import os
 from utils import config
+from services.logger import logger
 
 router = APIRouter()
 
@@ -31,7 +32,7 @@ async def save_file(file: UploadFile):
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid file type. Only PDFs are accepted.")
     except IOError as e:
-        Logger.error(e)
+        logger.error(e)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
 

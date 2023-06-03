@@ -1,4 +1,4 @@
-# models/ChatInput.py
+# models/chat_input.py
 from pydantic import BaseModel
 
 

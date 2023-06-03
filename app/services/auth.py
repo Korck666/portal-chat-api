@@ -3,13 +3,12 @@ from fastapi.security import OAuth2PasswordBearer
 from fastapi import Depends, HTTPException, status
 from fastapi import Security, HTTPException
 from fastapi.security.api_key import APIKeyHeader
-from app.services import mongodb
-from utils.config import (API_KEY_NAME,
-                          PORTAL_CHAT_API_KEY,
-                          MDB_USERS,
-                          AUTH_ALGORITHM)
+from services import mongodb
+from utils.config import (API_KEY_NAME, PORTAL_CHAT_API_KEY, AUTH_ALGORITHM)
 import jwt
 from jwt import PyJWTError
+from models.token_data import TokenData
+from services.logger import logger
 
 api_key_header = APIKeyHeader(name=API_KEY_NAME, auto_error=False)
 
@@ -31,6 +30,8 @@ async def authenticate_user(token: str = Depends(oauth2_scheme)):
                              algorithms=[AUTH_ALGORITHM])
         username: str = payload.get("sub")
         if username is None:
+            # TODO: Add logging and extra info to from the exception
+            logger.error("Could not validate credentials")
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
                                 detail="Could not validate credentials",
                                 headers={"WWW-Authenticate": "Bearer"})
@@ -39,12 +40,9 @@ async def authenticate_user(token: str = Depends(oauth2_scheme)):
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
                             detail="Could not validate credentials",
                             headers={"WWW-Authenticate": "Bearer"})
-    user = mongodb.get_user(database_name=MDB_USERS,
-                            username=token_data.username)
+    user = mongodb.get_user(username=token_data.username)
     if user is None:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
                             detail="Could not validate credentials",
                             headers={"WWW-Authenticate": "Bearer"})
     return user
-
-

@@ -4,3 +4,4 @@ openai
 pinecone-client
 python-multipart
 pymongo
+pyJWT

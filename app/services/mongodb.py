@@ -8,6 +8,12 @@ db = client[MDB_DATABASE]
 
 collections: dict = dict({MDB_LOGS: db[MDB_LOGS], MDB_USERS: db[MDB_USERS]})
 
+
 def get_database(client: MongoClient = client, database_name: str = MDB_DATABASE) -> Generator:
     db = client[database_name]
     yield db
+
+
+def get_user(username: str | None) -> Any:
+    user = collections[MDB_USERS].find_one({"username": username})
+    return user
