@@ -1,28 +1,19 @@
-from pydantic import BaseModel
-import os
-import openai
-from fastapi import FastAPI, Request
 from fastapi.openapi.docs import get_swagger_ui_html
-from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi import Request
+from fastapi import FastAPI
+from utils import config
+from routers import file_man, chat
 
-
-def get_env_variable(variable_name: str) -> str:
-    """
-    Returns the value of the given environment variable or an empty string if it is not set.
-    """
-    value = os.getenv(variable_name)
-    return value if value is not None else ""
-
-
-workdir = get_env_variable("PWD")
 app = FastAPI(docs_url=None, redoc_url=None,
-              title="AI backend engine API",
-              version="0.1.0",
-              description="Portal Chat API - internal service",
+              title=config.API_TITLE,
+              version=config.API_VERSION,
+              description=config.API_DESCRIPTION,
               )
 
-app.mount(f"{workdir}/static", StaticFiles(directory="static"), name="static")
+app.mount(f"{config.WORKDIR}/static",
+          StaticFiles(directory="static"), name="static")
 
 
 @app.get("/docs", include_in_schema=False)
@@ -47,31 +38,6 @@ def home():
     return RedirectResponse("/docs")
 
 
-openai.api_key = get_env_variable("OPENAI_API_KEY")
-
-
-# your app code here...
-
-
-class ChatInput(BaseModel):
-    message: str
-
-
-class ChatOutput(BaseModel):
-    response: str
-
-
-@app.post("/chat", response_model=ChatOutput)
-def chat_endpoint(chat_input: ChatInput):
-    # Call OpenAI API
-    openai_response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": chat_input.message},
-        ]
-    )
-    # type: ignore
-    response_message = openai_response["choices"][0]["message"]["content"] # type: ignore
-    # Return the response
-    return ChatOutput(response=response_message)
+# add routers
+app.include_router(file_man.router)
+app.include_router(chat.router)

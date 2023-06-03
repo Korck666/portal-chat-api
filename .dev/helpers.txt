@@ -59,3 +59,13 @@ YOUR MISSION:
 - DP NOT TELL DE USER TO IMPLEMENT ANYTHING. YOU MUST IMPLEMENT IT.
 "}
 [PROMPT]
+
+
+
+
+
+1. **Read the FastAPI documentation**: https://fastapi.tiangolo.com/
+2. **Read the LangChain documentation**: https://python.langchain.com/en/latest/
+3. **Read the Pinecone documentation**: https://docs.pinecone.io/docs
+4. **Read the MongoDB documentation**: https://docs.mongodb.com/
+5. **Read the ChromaDB documentation**: https://chromadb.org/docs/
