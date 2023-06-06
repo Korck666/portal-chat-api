@@ -1,12 +1,16 @@
-from logging import log
-from services.logger import logger
-from fastapi.openapi.docs import get_swagger_ui_html
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import HTMLResponse, RedirectResponse
-from fastapi import Request
-from fastapi import FastAPI
-from utils import config
 from routers import file_man, chat
+from utils import config
+from fastapi import FastAPI
+from fastapi import Request
+from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.openapi.docs import get_swagger_ui_html
+from services.logger import logger
+from logging import log
+import os
+# clean up cache
+os.system("rm -rf app/__pycache__")
+
 
 logger.info("Starting app...")
 logger.info(f"WORKDIR: {config.WORKDIR}")

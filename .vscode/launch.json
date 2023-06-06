@@ -10,6 +10,10 @@
             "request": "launch",
             "module": "uvicorn",
             "cwd": "${workspaceFolder}/app",
+            "python": "${command:python.interpreterPath}",
+            "pythonArgs": [
+                "-B"
+            ],
             "args": [
                 "main:app",
                 "--reload",
