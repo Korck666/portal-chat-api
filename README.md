@@ -5,7 +5,9 @@
 
 ## READ AND USE IT TO GET HELP FROM CHATGPT AND GITHUB COPILOT
 
-This is the REST API service that encapsulates multiple AI services, including ChatGPT and potentially Dall-E, and also manages game rules and database connections. This is a complex task that involves several components, and it would be best to approach it using a combination of design patterns. Here are what I need you to help me to implement:
+This is the REST API service that encapsulates multiple AI services, including ChatGPT and potentially Dall-E, and also manages game rules and database connections. 
+This is a complex task that involves several components, and it would be best to approach it using a combination of design patterns. 
+Here are some design patterns that we will use to build this service:
 
 1. **Facade Pattern**: This pattern provides a unified interface to a set of interfaces in a subsystem. We can use this pattern to create a simplified API for the various AI services we're using. This way, the rest of our application doesn't need to know about the specifics of interacting with these services.
 
@@ -16,7 +18,7 @@ This is the REST API service that encapsulates multiple AI services, including C
 4. **Strategy Pattern**: This pattern defines a family of algorithms, encapsulates each one, and makes them interchangeable. We can use this pattern to manage different game rules, for instance, allowing the game to have different pre-made game-systems (D&D5, D&D4, PathFinder, Cyberpunk, etc.), also we want to allow players to homebrew their own systems.
 
 As for writing clean and efficient code in Python, we are going to use LangChain for core orchestration of models, memory, prompt templates, tools, flows etc.
-We will use FastAPI  to provide the REST API interface along with auto-documentation and an easy integrated web testing package.
+We are using FastAPI to provide the REST API interface along with auto-documentation and an easy integrated web testing package.
 
 Following, please find some more guidelines that we need to implement into automation checks (github actions):
 

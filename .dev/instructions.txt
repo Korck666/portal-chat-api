@@ -1,5 +1,7 @@
+PROJECT:portal-chat-api (REST API) (python 3.10)
+================================================
 This project is a REST API to a table-top simulator RPG game server 
-and will provide multiple services that will demand external providers,
+and will provide multiple serviceshat will demand external providers,
 including ChatGPT, Railway, Pinecone, Chroma dB, Whisper, TheHuggingFace,
 Dall-E, and many others. Also will need to implement game managers for RPG
 rules like D&D5, Pathfinder, homebrew, etc., and setup database connections
@@ -13,17 +15,18 @@ What I have DONE:
 https://github.com/Korck666/portal-chat-api/tree/9fc337a06267667c6180f3e1706a8153e8ffc0f5
 - I have a working Dockerfile and a main.py with FastAPI default implementation
 including a server with auto documentation (but no tests yet)
+- FastAPI (web interface/documentation) -> FastAPI is used to provide the REST API 
+interface along with auto-documentation and an easy integrated web testing package.
 - I have RailWay setup with a working deployment of the server
-- I have a working MongoDB database on Railway
-- I have a working Pinecone database
+- I have a working MongoDB database on Railway and a working connection to it
+- I have a working server Logger with a working connection to the MongoDB database
+- I have a working Pinecone database instance, but not connected to the server yet
 
 What I have to do:
 - LangChain (orchestrator) -> Langchain will be used to orchestrate all the AI services
-- FastAPI (web interface/documentation) -> FastAPI will be used to provide the REST API 
-interface along with auto-documentation and an easy integrated web testing package.
 - Pytest (test) -> For the testing framework, we will use pytest, and for the CI/CD 
 we will use Github Actions.
-We will need to setup database connections to be used as memory, Pinecone and MongoDB
+- We will need to setup database connections to be used as memory, Pinecone and MongoDB
 where the two database I chose to start with, but we will need to implement a faster 
 vector in memory database to be used as a cache for the Pinecone database, and we will
 use ChromaDB for that.
@@ -56,29 +59,17 @@ code more readable and efficient.
 6. **Use more prompts if you need to in order to get the job done.
 7. **Understand FastAPI and LangChain documentation and create think of a lean architecture.
 
-WHERE TO START:
-1. ask chatwithgit for code showing fastAPI, langchain, pinecone and openai working together;
-2. ask chatwithgit for code showing mongodb client initialization and connection (need to connect to railway);
-3. ask chatwithgit for code showing how to create and initialize chromadb as a in-memory cache for pinecone;
-4. write a test for the chatbot service;
-5. write the chatbot service;
+REFERENCES if you need understanding or updating:
+1. **FastAPI documentation**: https://fastapi.tiangolo.com/
+2. **LangChain documentation**: https://python.langchain.com/en/latest/
+3. **Pinecone documentation**: https://docs.pinecone.io/docs
+4. **MongoDB documentation**: https://docs.mongodb.com/
+5. **ChromaDB documentation**: https://chromadb.org/docs/
 
-Create the main.py and other files necessary to run the server and the tests. Following again
-the project needs, we will need to implement the following services:
-- LangChain (orchestrator) -> Langchain will be used to orchestrate all the AI services
-- FastAPI (web interface/documentation) -> FastAPI will be used to provide the REST API 
-interface along with auto-documentation and an easy integrated web testing package.
-- Pytest (test) -> For the testing framework, we will use pytest, and for the CI/CD 
-we will use Github Actions.
-We will need to setup database connections to be used as memory, Pinecone and MongoDB
-where the two database I chose to start with, but we will need to implement a faster 
-vector in memory database to be used as a cache for the Pinecone database, and we will
-use ChromaDB for that.
-- Pinecone (vector memory) -> Pinecone will be used to store the vectors of the
-game rules to be used as reference for the AI models. We will need to implement
-a ingestion process to convert PDF and other formats to text and then to vectors
-to be stored in the database.
-- MongoDB (document database) -> MongoDB will be used to store the chat history and
-world state of the game, user profiles, and other data that will be used by use by
-different services, not only the AI services.
-- OpenAi (ai models) -> OpenAi will be used to provide the AI models
+WHERE TO START:
+1. ask chatwithcode to access my repository on github: https://github.com/Korck666/portal-chat-api
+2. understand my project structure and the code I have already written
+3. tell me what you think and what you would do differently
+
+
+
