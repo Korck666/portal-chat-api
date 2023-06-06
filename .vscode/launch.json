@@ -20,11 +20,15 @@
                 "--log-level",
                 "debug",
                 "--reload-dir",
-                "${workspaceFolder}/app",
+                "${workspaceFolder}/app"
             ],
             "jinja": true,
             "redirectOutput": true,
-            "justMyCode": true
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/app"
+            },
+            "console": "integratedTerminal"
         }
     ]
 }

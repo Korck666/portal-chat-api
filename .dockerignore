@@ -1,0 +1,24 @@
+app/uploads/*
+**node_modules
+**dist
+**build
+**venv
+**__pycache__
+**.env
+# **.dev*
+# **.vscode
+# **.github
+# templates
+# directory-tree.md
+**.tmp
+**.log
+**.cache
+**.egg*
+**.venv
+**.pytest_cache
+**.mypy_cache
+**.tox
+**.coverage
+**.DS_Store
+**.ipynb_checkpoints
+**.jupyter

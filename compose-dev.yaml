@@ -17,6 +17,7 @@ services:
         - PINECONE_INDEX_NAMESPACE_GAME_SYSTEMS=${PINECONE_INDEX_NAMESPACE_GAME_SYSTEMS}
         - PORT=${PORT}
         - PORTAL_CHAT_API_KEY=${PORTAL_CHAT_API_KEY}
+        - PYTHONDONTWRITEBYTECODE=1
     container_name: portal-chat-api
     environment:
       PORT: 8000

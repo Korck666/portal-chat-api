@@ -3,7 +3,7 @@ from fastapi.security import OAuth2PasswordBearer
 from fastapi import Depends, HTTPException, status
 from fastapi import Security, HTTPException
 from fastapi.security.api_key import APIKeyHeader
-import mongodb
+import services.mongodb as mongodb
 from utils.config import (API_KEY_NAME, PORTAL_CHAT_API_KEY, AUTH_ALGORITHM)
 import jwt
 from jwt import PyJWTError
