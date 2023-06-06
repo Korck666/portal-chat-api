@@ -8,8 +8,12 @@ services:
         - CHAT_SERVICE_URL=${CHAT_SERVICE_URL}
         - OPENAI_API_KEY=${OPENAI_API_KEY}
         - OPENAI_ORG_ID=${OPENAI_ORG_ID}
-        - MONGO_CHAT_API_SETTINGS=${MONGO_CHAT_API_SETTINGS}
-        - MONGO_URL=${MONGO_URL}
+          #MONGO DB SETTINGS ========================================
+        - PCAPI_MONGO_DB=${PCAPI_MONGO_DB}
+        - PCAPI_MONGO_COLLECTION_USER=${PCAPI_MONGO_COLLECTION_USER}
+        - PCAPI_MONGO_COLLECTION_LOGS=${PCAPI_MONGO_COLLECTION_LOGS}
+        - PCAPI_MONGO_URL=${PCAPI_MONGO_URL}
+          #===========================================================
         - LISTENER_AUTH_KEY=${LISTENER_AUTH_KEY}
         - PINECONE_API_KEY=${PINECONE_API_KEY}
         - PINECONE_ENVIRONMENT=${PINECONE_ENVIRONMENT}
@@ -18,12 +22,6 @@ services:
         - PORT=${PORT}
         - PORTAL_CHAT_API_KEY=${PORTAL_CHAT_API_KEY}
         - PYTHONDONTWRITEBYTECODE=1
-        - graceful_timeout= 120
-        - timeout=120
-        - keepalive=5
-        - errorlog="-"
-        - accesslog="-"
-        - workers_per_core=1.0
     container_name: portal-chat-api
     environment:
       PORT: 8000

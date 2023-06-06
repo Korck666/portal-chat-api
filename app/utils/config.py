@@ -37,15 +37,15 @@ DEFAULT_FILE_CHUNCK_INDEX: int = 3  # 8192 bytes
 
 AUTH_ALGORITHM: str = "HS256"
 
-MONGO_CHAT_API_SETTINGS = dict(json.loads(
-    get_env_variable("MONGO_CHAT_API_SETTINGS")))
 print("=====================================")
 print("MONGO_CHAT_API_SETTINGS")
 print("=====================================")
-for k, v in MONGO_CHAT_API_SETTINGS.items():
-    print(f"{k}:{v}")
+MONGO_URL = get_env_variable("PCAPI_MONGO_URL")
+print(f"MONOGO_URL: {MONGO_URL}")
+MDB_DATABASE = get_env_variable("PCAPI_MONGO_DB")
+print(f"MDB_DATABASE: {MDB_DATABASE}")
+MDB_USERS = get_env_variable("PCAPI_MONGO_COLLECTION_USER")
+print(f"MDB_USERS: {MDB_USERS}")
+MDB_LOGS = get_env_variable("PCAPI_MONGO_COLLECTION_LOGS")
+print(f"MDB_LOGS: {MDB_LOGS}")
 print("=====================================")
-MDB_USERS = MONGO_CHAT_API_SETTINGS["MDB_USERS_COLLECTION"]
-MDB_LOGS = MONGO_CHAT_API_SETTINGS["MDB_LOGS_COLLECTION"]
-MDB_DATABASE = MONGO_CHAT_API_SETTINGS["MDB_DATABASE"]
-MONGO_URL = get_env_variable("MONGO_URL")
