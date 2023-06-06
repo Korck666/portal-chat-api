@@ -18,13 +18,19 @@ services:
         - PORT=${PORT}
         - PORTAL_CHAT_API_KEY=${PORTAL_CHAT_API_KEY}
         - PYTHONDONTWRITEBYTECODE=1
+        - graceful_timeout= 120
+        - timeout=120
+        - keepalive=5
+        - errorlog="-"
+        - accesslog="-"
+        - workers_per_core=1.0
     container_name: portal-chat-api
     environment:
       PORT: 8000
     expose:
       - 8000
     ports:
-      - '8000:8000'
+      - "8000:8000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: "no"

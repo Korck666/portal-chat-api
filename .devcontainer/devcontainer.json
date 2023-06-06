@@ -44,7 +44,8 @@
 				"GitHub.copilot-chat",
 				"GitHub.copilot-nightly",
 				"ms-edgedevtools.vscode-edge-devtools",
-				"zhuangtongfa.Material-theme"
+				"zhuangtongfa.Material-theme",
+				"redhat.vscode-yaml"
 			]
 		}
 	},

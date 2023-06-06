@@ -1,4 +1,4 @@
-FROM tiangolo/uvicorn-gunicorn:python3.10-slim
+FROM tiangolo/uvicorn-gunicorn:python3.10
 
 ARG CHAT_SERVICE_URL="http://0.0.0.0:8000"
 ARG OPENAI_API_KEY=""
