@@ -2,16 +2,18 @@
 import asyncio
 from logging import Logger, raiseExceptions
 from fastapi import APIRouter, status
-from utils import config
+from pydantic import config
+from utils.config import Config
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi import UploadFile, HTTPException
 from typing import List
 import os
-from utils import config
-from services.logger import logger
+from services.logger import Logger
 
 router = APIRouter()
+logger = Logger()
+config = Config()
 
 router.mount(f"{config.WORKDIR}/upload",
              StaticFiles(directory="upload"), name="upload")
@@ -24,7 +26,7 @@ async def save_file(file: UploadFile):
         if file_name.endswith('.pdf'):
             with open(f"{config.WORKDIR}/upload/{file.filename}", "wb") as buffer:
                 while True:
-                    chunk = await file.read(config.FILE_CHUNCK[config.DEFAULT_FILE_CHUNCK_INDEX])
+                    chunk = await file.read(config.FILE_CHUNCK)
                     if not chunk:  # End of file
                         break
                     buffer.write(chunk)

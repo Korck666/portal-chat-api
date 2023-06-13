@@ -1,6 +1,6 @@
 {
   "[python]": {
-    "editor.defaultFormatter": "ms-python.python",
+    "editor.defaultFormatter": "ms-python.autopep8",
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
       "source.organizeImports": true
@@ -20,12 +20,13 @@
   "python.analysis.typeCheckingMode": "basic",
   "python.formatting.provider": "none",
   "python.languageServer": "Pylance",
+  "python.analysis.fixAll": ["source.convertImportFormat", "source.unusedImports"],
   "python.analysis.autoImportCompletions": true,
-  // "python.analysis.diagnosticMode": "workspace",
-  // "python.analysis.disableSemanticOnNoPython": false,
-  // "python.analysis.enableSyncServer": true,
+  "python.analysis.diagnosticMode": "workspace",
+  "python.analysis.disableSemanticOnNoPython": false,
+  "python.analysis.enableSyncServer": true,
   "[ignore]": {
-    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+    "editor.defaultFormatter": "ms-python.python",
   },
   "indentRainbow.colorOnWhiteSpaceOnly": true,
   "indentRainbow.indicatorStyle": "light",

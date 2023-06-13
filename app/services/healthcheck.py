@@ -1,11 +1,12 @@
-# services/keepalive.py
-
 import asyncio
 import time
-from models.token_data import TokenData
-from routers.file_man import JSONResponse
-from services.logger import logger
+
 from typing import List, Optional
+from routers.file_man import JSONResponse
+from models.token_data import TokenData
+from services.logger import Logger
+
+logger = Logger()
 
 
 class HealthCheck:
@@ -29,10 +30,9 @@ class HealthCheck:
 
     _instances: List['HealthCheck'] = []
 
-    def __init__(self, service_name: Optional[str]):
-        self._instances.append(self)
-        # add the service name to the logger
+    def __init__(self, service_name: Optional[str] = None):
         self.service_name = service_name or __name__
+        self._instances.append(self)
 
     async def _healthcheck(self, auth_token: Optional[TokenData]) -> JSONResponse:
         # Default implementation adds a log message with the service name
@@ -48,9 +48,10 @@ class HealthCheck:
         responses = []
         for task in asyncio.as_completed(tasks):
             start_time = time.time()
-            response = await task
+            response: Optional[JSONResponse] = await task
             end_time = time.time()
             response_time = end_time - start_time
-            responses.append(JSONResponse(status_code=200, content={
-                             "message": response.json().get("message"), "response_time": response_time}))
+            if response is not None:
+                responses.append(JSONResponse(status_code=200, content={
+                    "message": response.body[slice("message", "message" + "\0")], "response_time": response_time}))
         return responses

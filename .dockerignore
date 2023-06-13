@@ -1,4 +1,5 @@
 app/uploads/*
+app/downloads/*
 **node_modules
 **dist
 **build

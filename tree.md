@@ -16,6 +16,7 @@
 │   │   ├── __init__.py
 │   │   ├── chat.py
 │   │   ├── file_man.py
+│   │   ├── healthcheck.py
 │   │   └── keepalive.py
 │   ├── scripts
 │   │   ├── postcommand.sh
@@ -24,6 +25,7 @@
 │   ├── services
 │   │   ├── __init__.py
 │   │   ├── auth.py
+│   │   ├── healthcheck.py
 │   │   ├── keepalive.py
 │   │   ├── logger.py
 │   │   ├── mongodb.py
@@ -39,31 +41,31 @@
 │       └── config.py
 ├── compose-dev.yaml
 ├── requirements.txt
-└── templates
-    ├── game_payload
-    │   ├── worldCreation.json
-    │   └── worldCreationExample.json
-    └── game_systems
-        ├── DnD 5e Players Handbook (BnW OCR)-Fixed Pages.pdf
-        ├── GURPS - 4th Edition - Basic Set.pdf
-        ├── Pathfinder_Core_Rulebook.pdf
-        └── cyberpunk.pdf
+├── templates
+│   ├── game_payload
+│   │   ├── worldCreation.json
+│   │   └── worldCreationExample.json
+│   └── game_systems
+│       ├── DnD 5e Players Handbook (BnW OCR)-Fixed Pages.pdf
+│       ├── GURPS - 4th Edition - Basic Set.pdf
+│       ├── Pathfinder_Core_Rulebook.pdf
+│       └── cyberpunk.pdf
+└── tree.md
 
-11 directories, 35 files
+11 directories, 38 files
 ```
 
 ```python
 # Content of ./app/main.py:
 # main.py: This file sets up the FastAPI application and includes the routers.
 
-from app.services import keepalive
 from utils import config
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.openapi.docs import get_swagger_ui_html
 from services.logger import logger
-from routers import file_man, chat, keepalive
+from routers import file_man, chat, keepalive, healthcheck
 from logging import log
 import os
 
@@ -96,6 +98,7 @@ try:
     app.include_router(file_man.router)
     app.include_router(chat.router)
     app.include_router(keepalive.router)
+    app.include_router(healthcheck.router)
     logger.info("Routers added successfully.")
 except Exception as e:
     logger.error(f"Error adding routers: {e}")
@@ -241,6 +244,24 @@ async def upload_files(files: List[UploadFile] = []):
     await asyncio.gather(*tasks)
     return JSONResponse(status_code=200, content={"message": "Files uploaded successfully."})
 
+# Content of ./app/routers/healthcheck.py:
+# routers/healtcheck.py
+from fastapi import APIRouter, Depends
+from fastapi.responses import JSONResponse
+from services import auth
+from services.auth import authenticate_api_key
+from services.healthcheck import HealthCheck
+
+router = APIRouter()
+
+
+@router.get("/healthcheck", dependencies=[Depends(authenticate_api_key)])
+def healthcheck() -> JSONResponse:
+    # we may do some preprocessing here
+    auth_token = auth.TokenData(scopes=["healthcheck"])
+    # Return the response
+    return HealthCheck.healthcheck(auth_token)
+
 # Content of ./app/routers/keepalive.py:
 # routers/keepalive.py
 from fastapi import APIRouter, Depends
@@ -310,6 +331,64 @@ async def authenticate_user(token: str = Depends(oauth2_scheme)):
                             detail="Could not validate credentials",
                             headers={"WWW-Authenticate": "Bearer"})
     return user
+
+# Content of ./app/services/healthcheck.py:
+# services/keepalive.py
+
+import asyncio
+import time
+from models.token_data import TokenData
+from routers.file_man import JSONResponse
+from services.logger import logger
+from typing import List, Optional
+
+
+class HealthCheck:
+    """
+    A class used to represent the HealthCheck service
+
+    ...
+
+    Attributes
+    ----------
+    _instances : list
+        a class variable to keep track of all instances of this class
+
+    Methods
+    -------
+    _healthcheck():
+        The default implementation of the healthcheck method. Can be overridden in subclasses.
+    healthcheck():
+        Class method that calls the _healthcheck method on all instances of this class and measures the response time.
+    """
+
+    _instances: List['HealthCheck'] = []
+
+    def __init__(self, service_name: Optional[str]):
+        self._instances.append(self)
+        # add the service name to the logger
+        self.service_name = service_name or __name__
+
+    async def _healthcheck(self, auth_token: Optional[TokenData]) -> JSONResponse:
+        # Default implementation adds a log message with the service name
+        message = f"{self.service_name} | healthcheck - OK"
+        logger.info(message)
+        return JSONResponse(status_code=200, content={"message": message})
+
+    @classmethod
+    async def healthcheck(cls, auth_token: Optional[TokenData]) -> List[JSONResponse]:
+        # Use asyncio.gather to run all _healthcheck checks concurrently
+        tasks = [instance._healthcheck(auth_token)
+                 for instance in cls._instances]
+        responses = []
+        for task in asyncio.as_completed(tasks):
+            start_time = time.time()
+            response = await task
+            end_time = time.time()
+            response_time = end_time - start_time
+            responses.append(JSONResponse(status_code=200, content={
+                             "message": response.json().get("message"), "response_time": response_time}))
+        return responses
 
 # Content of ./app/services/keepalive.py:
 # services/keepalive.py
@@ -455,7 +534,9 @@ class services:
     Methods
     -------
     """
-    __all__: list[str] = ['auth', 'keepalive', 'mongodb', 'openai', 'logger']
+    __all__: list[str] = ['auth', 'healthcheck',
+                          'keepalive', 'mongodb',
+                          'openai', 'logger']
 
     @classmethod
     def services(cls) -> list[str]:

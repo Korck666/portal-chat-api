@@ -1,14 +1,16 @@
 # main.py: This file sets up the FastAPI application and includes the routers.
 
-from utils import config
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.openapi.docs import get_swagger_ui_html
-from services.logger import logger
 from routers import file_man, chat, keepalive, healthcheck
-from logging import log
 import os
+from utils.config import Config
+from services.logger import Logger
+
+logger = Logger()
+config = Config()
 
 # Clean up cache
 os.system("rm -rf app/__pycache__")
