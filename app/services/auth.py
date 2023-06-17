@@ -15,7 +15,7 @@ class Authenticator:
     def __init__(self, auth_type: str):
         self.auth_type = auth_type
         self.config = Config()
-        self.mongodb = MongoDB()
+        self.mongodb = MongoDB(self.config)
         self.logger = Logger()
 
         if self.auth_type == "api_key":

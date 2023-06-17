@@ -6,7 +6,6 @@ from services.openai import OpenAI
 router = APIRouter()
 openai = OpenAI()
 
-
 @router.websocket("/ws")
 async def chat_websocket(websocket: WebSocket):
     await websocket.accept()
