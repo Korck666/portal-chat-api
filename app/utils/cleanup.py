@@ -1,16 +1,16 @@
 # util/cleanup.py
+import datetime
+import logging
+import os
 import shutil
-from typing import Optional
 from pathlib import Path
 from threading import Lock
-import logging
+from typing import Optional
+
 import utils.config as config
 from services.logger import Logger
-import datetime
-import os
 
 logger = Logger()
-
 
 class Cleanup:
     """

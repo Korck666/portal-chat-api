@@ -1,19 +1,21 @@
 # main.py: This file sets up the FastAPI application and includes the routers.
 
+import os
+
 from fastapi import FastAPI, Request
+from fastapi.openapi.docs import get_swagger_ui_html
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
-from fastapi.openapi.docs import get_swagger_ui_html
-from routers import file_man, chat, keepalive, healthcheck
-import os
-from utils.config import Config
+from routers import chat, file_man, healthcheck, keepalive, ws_chat
 from services.logger import Logger
+from utils.cleanup import Cleanup
+from utils.config import Config
 
 logger = Logger()
 config = Config()
 
 # Clean up cache
-os.system("rm -rf app/__pycache__")
+Cleanup().cleanup_cache()
 
 logger.info("Starting app...")
 
@@ -40,6 +42,7 @@ try:
     logger.info("Adding routers...")
     app.include_router(file_man.router)
     app.include_router(chat.router)
+    app.include_router(ws_chat.router)
     app.include_router(keepalive.router)
     app.include_router(healthcheck.router)
     logger.info("Routers added successfully.")

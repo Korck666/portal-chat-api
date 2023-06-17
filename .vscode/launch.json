@@ -26,13 +26,13 @@
                 "--reload-dir",
                 "${workspaceFolder}/app"
             ],
-            "jinja": true,
-            "redirectOutput": true,
-            "justMyCode": true,
+            // "jinja": true,
+            // "redirectOutput": true,
+            "justMyCode": false,
             "env": {
                 "PYTHONPATH": "${workspaceFolder}/app"
             },
-            "console": "integratedTerminal"
+            // "console": "integratedTerminal"
         }
     ]
 }

@@ -1,21 +1,21 @@
 import asyncio
-from ctypes import Union
 from typing import Callable, Dict
+
 import jwt
+from fastapi import Depends, HTTPException, status
+from fastapi.security import APIKeyHeader, OAuth2PasswordBearer
 from jwt import PyJWTError
-from fastapi import Depends, HTTPException, status, Security
-from fastapi.security import OAuth2PasswordBearer, APIKeyHeader
-from utils.config import Config
 from models.token_data import TokenData
-from services.mongodb import MongoDB
 from services.logger import Logger
+from services.mongodb import MongoDB
+from utils.config import Config
 
 
 class Authenticator:
     def __init__(self, auth_type: str):
         self.auth_type = auth_type
         self.config = Config()
-        self.mongodb = MongoDB()
+        self.mongodb = MongoDB(self.config)
         self.logger = Logger()
 
         if self.auth_type == "api_key":
