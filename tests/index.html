@@ -6,11 +6,12 @@
   </head>
   <body>
     <h1>WebSocket Chat</h1>
-    <ul id="messages"></ul>
+    <ul id="messages">
+    </ul>
     <form>
       <label for="message">Message:</label>
       <input type="text" id="message" name="message">
-      <button type="button" onclick="sendMessage()">Send</button>
+      <button type="button" id="button" onclick="sendMessage()">Send</button>
     </form>
     <script>
       const socket = new WebSocket('ws://localhost:8000/ws');
@@ -20,31 +21,44 @@
       socket.addEventListener('open', (event) => {
         console.log('WebSocket connected');
       });
-
+      
       socket.addEventListener('message', (event) => {
-        if (event.data.endsWith('\n')) {
-          // If the message ends with a newline character, it's the end of a message
-          const message = document.createElement('li');
-          message.textContent = messageBuffer + event.data.slice(0, -1);
-          messages.appendChild(message);
-          messageBuffer = '';
-        } else {
-          // Otherwise, it's a chunk of a message, so append it to the buffer
-          messageBuffer += event.data;
-        }
+          const message = document.getElementById('response');
+          message.textContent += event.data;
+          if (event.data === '') {
+            message.style.color = 'green';
+            message.id = gettime().toString();
+            document.updateElementById('response', message);
+            console.log('Message from server ', message.textContent);
+            document.getElementById('message').attributes.disabled = false;
+            document.getElementById('button').attributes.disabled = false;
+          }
       });
 
       function sendMessage() {
-        const input = document.getElementById('message');
-        const message = input.value;
-        input.value = '';
+        inbox = document.getElementById('message');
+        button = document.getElementById('button');
+        inbox.attributes.disabled = true;
+        button.attributes.disabled = true;
+        //
+        const message = document.getElementById('messages').createElement('p', id='sent');
+        const m = message.textContent = inbox.value;
+        message.style.color = 'blue';
+        inbox.value = '';
 
-        const sentMessage = document.createElement('li');
-        sentMessage.textContent = message;
-        messages.appendChild(sentMessage);
+        message = document.getElementById('messages').createElement('p', id='response');
+        message.style.color = 'orange';
 
-        socket.send(message);
+        socket.send(m);
       }
+
+      const input = document.getElementById('message');
+      input.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          sendMessage();
+        }
+      });
     </script>
   </body>
 </html>

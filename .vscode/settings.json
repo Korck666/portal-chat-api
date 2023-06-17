@@ -1,6 +1,6 @@
 {
   "[python]": {
-    "editor.defaultFormatter": "ms-python.python",
+    "editor.defaultFormatter": "ms-python.autopep8",
     "editor.codeActionsOnSave": {
       "source.organizeImports": true
     },
@@ -40,5 +40,6 @@
     "rgba(79,236,236,0.07)"
   ],
   "codeium.enableSearch": true,
-  "vscode-edge-devtools.browserFlavor": "Dev"
+  "vscode-edge-devtools.browserFlavor": "Dev",
+  "python.formatting.provider": "none"
 }
