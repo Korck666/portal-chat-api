@@ -1,11 +1,11 @@
 # routers/chat.py
 from fastapi import APIRouter, Depends
-from pydantic import config
-from services.auth import Authenticator
-from utils.config import Config
 from models.chat_input import ChatInput
 from models.chat_output import ChatOutput
+from pydantic import config
+from services.auth import Authenticator
 from services.openai import OpenAI
+from utils.config import Config
 
 router = APIRouter()
 chat_model = OpenAI()
@@ -20,3 +20,4 @@ def chat_endpoint(chat_input: ChatInput):
     # we may do some preprocessing here
     # Return the response
     return ChatOutput(response=chat_model.chat(config.CHAT_MODEL, chat_prep, chat_input.message))
+

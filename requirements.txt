@@ -5,3 +5,5 @@ pinecone-client
 python-multipart
 pymongo
 pyJWT
+pylint
+pytest

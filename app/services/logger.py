@@ -1,10 +1,11 @@
-from collections.abc import Iterable
+# app/services/logger.py
+
 import logging
 from typing import Optional
 
-from services.mongodb_handler import MongoDBHandler
-from services.mongodb import MongoDB
 import utils.config as config
+from services.mongodb import MongoDB
+from services.mongodb_handler import MongoDBHandler
 
 
 class Logger():
@@ -25,7 +26,7 @@ class Logger():
             cls._instance = super().__new__(cls)
             cls.logger = logging.getLogger()
             cls.config = config.Config()
-            cls.mongodb = MongoDB()
+            cls.mongodb = MongoDB(cls.config)
             cls.logger.setLevel(cls.config.LOG_LEVEL)
             cls.dbhandler = MongoDBHandler(
                 collection=cls.mongodb.collections[cls.config.DB_LOGS])
