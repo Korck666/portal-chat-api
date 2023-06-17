@@ -1,4 +1,8 @@
 {
+  "security.allowedUNCHosts": [
+    "wsl.localhost"
+],
+
   "[python]": {
     "editor.defaultFormatter": "ms-python.autopep8",
     "editor.codeActionsOnSave": {
