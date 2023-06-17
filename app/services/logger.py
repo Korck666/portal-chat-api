@@ -26,7 +26,7 @@ class Logger():
             cls._instance = super().__new__(cls)
             cls.logger = logging.getLogger()
             cls.config = config.Config()
-            cls.mongodb = MongoDB()
+            cls.mongodb = MongoDB(cls.config)
             cls.logger.setLevel(cls.config.LOG_LEVEL)
             cls.dbhandler = MongoDBHandler(
                 collection=cls.mongodb.collections[cls.config.DB_LOGS])
