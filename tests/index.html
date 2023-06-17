@@ -2,34 +2,47 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>WebSocket Test</title>
+    <title>WebSocket Chat</title>
   </head>
   <body>
-    <h1>WebSocket Test</h1>
+    <h1>WebSocket Chat</h1>
+    <ul id="messages"></ul>
     <form>
       <label for="message">Message:</label>
       <input type="text" id="message" name="message">
       <button type="button" onclick="sendMessage()">Send</button>
     </form>
-    <ul id="messages"></ul>
     <script>
       const socket = new WebSocket('ws://localhost:8000/ws');
       const messages = document.getElementById('messages');
+      let messageBuffer = '';
 
       socket.addEventListener('open', (event) => {
         console.log('WebSocket connected');
       });
 
       socket.addEventListener('message', (event) => {
-        const message = document.createElement('li');
-        message.textContent = event.data;
-        messages.appendChild(message);
+        if (event.data.endsWith('\n')) {
+          // If the message ends with a newline character, it's the end of a message
+          const message = document.createElement('li');
+          message.textContent = messageBuffer + event.data.slice(0, -1);
+          messages.appendChild(message);
+          messageBuffer = '';
+        } else {
+          // Otherwise, it's a chunk of a message, so append it to the buffer
+          messageBuffer += event.data;
+        }
       });
 
       function sendMessage() {
         const input = document.getElementById('message');
         const message = input.value;
         input.value = '';
+
+        const sentMessage = document.createElement('li');
+        sentMessage.textContent = message;
+        messages.appendChild(sentMessage);
+
         socket.send(message);
       }
     </script>
