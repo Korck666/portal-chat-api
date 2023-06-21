@@ -1,6 +1,6 @@
 from time import sleep
 from fastapi import APIRouter, Depends, WebSocket
-from app.services.authenticator import Authenticator
+from services.authenticator import Authenticator
 from services.openai import OpenAI
 from services.logger import Logger
 
@@ -29,4 +29,3 @@ async def chat_websocket(websocket: WebSocket):
             messages.append(chunk["choices"][0]["delta"].get("content", ""))
             await websocket.send_text(messages[-1])
             sleep(0.05)
-

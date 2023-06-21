@@ -2,7 +2,7 @@
 from fastapi import APIRouter, Depends
 from fastapi.responses import JSONResponse
 from models.token_data import TokenData
-from app.services.authenticator import Authenticator
+from services.authenticator import Authenticator
 from services.healthcheck import HealthCheck
 
 router = APIRouter()

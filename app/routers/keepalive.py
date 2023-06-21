@@ -1,7 +1,7 @@
 # routers/keepalive.py
 from fastapi import APIRouter, Depends
 from fastapi.responses import JSONResponse
-from app.services.authenticator import Authenticator
+from services.authenticator import Authenticator
 from services.keepalive import KeepAlive
 from models.token_data import TokenData
 

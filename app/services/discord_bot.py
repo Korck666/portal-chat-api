@@ -24,40 +24,39 @@ class DiscordBot:
             cls._discord = DiscordOAuthClient(
                 "<client-id>", "<client-secret>", "<redirect-url>", ("identify", "guilds", "email"))
             cls._instance = super().__new__(cls)
-            await cls._instance._initialize()
-            cls._process = Process(target=cls._run)
+            # await cls._instance._initialize()
+            # cls._process = Process(target=cls._run)
         return cls._instance
 
-    async def _initialize(self):
-        super().__init__()
+    # async def _initialize(self):
+    #     super().__init__()
 
-        await self._discord.init()
+    #     await self._discord.init()
 
-        self._instance = self
+    #     self._instance = self
 
-@DiscordBot._discord.user
-async def on_ready():
-    logger.info(f'{self.client.user} has connected to Discord!')
+    # async def on_ready():
+    #     logger.info(f'{self.client.user} has connected to Discord!')
 
-        @self.client.event
-        async def on_message(message):
-            if message.author == self.client.user:  # ignore messages from self
-                return
+    #         @self.client.event
+    #         async def on_message(message):
+    #             if message.author == self.client.user:  # ignore messages from self
+    #                 return
 
-            if message.content.startswith('!hello'):
-                await message.channel.send('Hello!')
+    #             if message.content.startswith('!hello'):
+    #                 await message.channel.send('Hello!')
 
-    @classmethod
-    async def stop(cls):
-        await cls._instance.client.close() if cls._instance else None
-        cls._instance = None
+    # @classmethod
+    # async def stop(cls):
+    #     await cls._instance.client.close() if cls._instance else None
+    #     cls._instance = None
 
-    @classmethod
-    async def _run(cls):
-        cls._instance.client.run(config.DISCORD_APP_AUTH_TOKEN,
-                                 reconnect=True,
-                                 log_handler=logger.dbhandler) if cls._instance else None
+    # @classmethod
+    # async def _run(cls):
+    #     cls._instance.client.run(config.DISCORD_APP_AUTH_TOKEN,
+    #                              reconnect=True,
+    #                              log_handler=logger.dbhandler) if cls._instance else None
 
-    @classmethod
-    def start(cls):
-        cls._process.start()
+    # @classmethod
+    # def start(cls):
+    #     cls._process.start()
