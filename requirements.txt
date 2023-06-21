@@ -12,4 +12,6 @@ fastapi_discord
 ujson
 msgpack
 python-dotenv
+ngrok-api
+
 

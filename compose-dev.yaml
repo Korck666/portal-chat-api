@@ -34,7 +34,7 @@ services:
 
     container_name: portal-chat-api
     environment:
-      PORT: [8000,4040]
+      PORT: 8000 4040
     expose:
       - 8000
       - 4040

@@ -1,4 +1,9 @@
 {
+  "python.formatting.provider": "autopep8",
+  "python.formatting.autopep8Args": [
+    "--max-line-length",
+    "120"
+  ],
   "[python]": {
     "editor.defaultFormatter": "ms-python.autopep8",
     "editor.codeActionsOnSave": {
@@ -20,15 +25,14 @@
   "git.enableSmartCommit": true,
   // "workbench.colorTheme": "One Dark Pro",
   "python.analysis.typeCheckingMode": "basic",
-  // "python.formatting.provider": "none",
   "python.languageServer": "Default",
   "python.analysis.indexing": true,
   "python.analysis.autoImportCompletions": true,
   "python.analysis.diagnosticMode": "workspace",
   // "python.analysis.enableSyncServer": true,
-  // "[ignore]": {
-  //   "editor.defaultFormatter": "ms-python.python",
-  // },
+  "[ignore]": {
+    "editor.defaultFormatter": "ms-python.python",
+  },
   "indentRainbow.colorOnWhiteSpaceOnly": true,
   "indentRainbow.indicatorStyle": "light",
   "indentRainbow.tabmixColor": "rgba(128,32,96,0.5)",
@@ -41,5 +45,4 @@
   ],
   "codeium.enableSearch": true,
   "vscode-edge-devtools.browserFlavor": "Dev",
-  "python.formatting.provider": "none"
 }

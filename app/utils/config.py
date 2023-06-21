@@ -9,7 +9,7 @@ from dataclasses import dataclass
 @dataclass
 class Config:
     @staticmethod
-    def log_level_dict(log_level:str="INFO") -> int:
+    def log_level_dict(log_level: str = "INFO") -> int:
         return {
             "INFO": logging.INFO,
             "DEBUG": logging.DEBUG,
@@ -17,8 +17,7 @@ class Config:
             "ERROR": logging.ERROR,
             "CRITICAL": logging.CRITICAL,
             "NOTSET": logging.NOTSET
-        } [log_level]
-
+        }[log_level]
 
     AUTH_ALGORITHM: str = os.environ.get("AUTH_ALGORITHM", "HS256")
     LOG_LEVEL: int = log_level_dict(os.environ.get("LOG_LEVEL", "INFO"))
@@ -32,7 +31,7 @@ class Config:
     NGROK_TUNNEL_URL: str = f"http://{LOCAL_HOST}:{NGROK_TUNNEL_PORT}/api/tunnels"
     NGROK_AUTH_TOKEN: str = os.environ.get("NGROK_AUTH_TOKEN", "")
     # =====================================================
-    
+
     LOG_FORMAT: str = os.environ.get("LOG_FORMAT", "%(asctime)s - %(name)s - %(levelname)s - %(message)s")
     LOG_DATE_FORMAT: str = os.environ.get("LOG_DATE_FORMAT", "%Y-%m-%d %H:%M:%S")
     LOG_FILE: str = os.environ.get("LOG_FILE", "portal-chat-api.log")
@@ -56,7 +55,7 @@ class Config:
     MONGODB_DB: str = os.environ.get("PCAPI_MONGO_DB", "portal-chat-api")
     DB_USERS: str = os.environ.get("PCAPI_MONGO_COLLECTION_USER", "users")
     DB_LOGS: str = os.environ.get("PCAPI_MONGO_COLLECTION_LOGS", "logs")
-    MONGODB_URL: str = os.environ.get("PCAPI_MONGO_URL", f"mongodb://mongo:GSySaJn2JEinuRYEn9IY@containers-us-west-88.railway.app:5573")
+    MONGODB_URL: str = os.environ.get("PCAPI_MONGO_URL", f"not set")
 
     DISCORD_APP_AUTH_TOKEN: str = os.environ.get("DISCORD_APP_AUTH_TOKEN", "not set")
     DISCORD_APP_ID: str = os.environ.get("DISCORD_APP_ID", "not set")
