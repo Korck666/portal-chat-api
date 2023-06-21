@@ -1,5 +1,5 @@
 import pytest
-from app.services.auth import Authenticator
+from app.services.authenticator import Authenticator
 from fastapi import HTTPException
 
 

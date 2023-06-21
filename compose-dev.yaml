@@ -22,7 +22,9 @@ services:
         - PORT=${PORT}
         - PORTAL_CHAT_API_KEY=${PORTAL_CHAT_API_KEY}
         - PYTHONDONTWRITEBYTECODE=1
+        # NGROK SETTINGS ============================================
         - ENV NGROK_TUNNEL_PORT=${NGROK_TUNNEL_PORT}
+        - ENV NGROK_AUTH_TOKEN=${NGROK_AUTH_TOKEN}
         #============================================================
         - ENV DISCORD_APP_AUTH_TOKEN=${DISCORD_APP_AUTH_TOKEN}
         - ENV DISCORD_APP_ID=${DISCORD_APP_ID}

@@ -1,6 +1,6 @@
 from time import sleep
 from fastapi import APIRouter, Depends, WebSocket
-from services.auth import Authenticator
+from app.services.authenticator import Authenticator
 from services.openai import OpenAI
 from services.logger import Logger
 

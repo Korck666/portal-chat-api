@@ -18,6 +18,7 @@ ARG PCAPI_MONGO_COLLECTION_LOGS="logs"
 ARG PCAPI_MONGO_URL="mongodb://mongo:auth@host:port"
 #===========================================================
 ARG NGROK_TUNNEL_PORT=4040
+ARG NGROK_AUTH_TOKEN="not set"
 #============================================================
 ARG DISCORD_APP_AUTH_TOKEN="not set"
 ARG DISCORD_APP_ID="not set"
@@ -32,7 +33,12 @@ LABEL key="portal-chat-api"
 
 COPY requirements.txt /tmp/requirements.txt
 RUN pip install --upgrade pip && pip install --no-cache-dir -r /tmp/requirements.txt && \
-    apt-get update && apt-get install -y git
+    apt-get update && apt-get install -y git && \
+    curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | \
+    tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && \
+    echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | \
+    tee /etc/apt/sources.list.d/ngrok.list && \
+    apt update && apt install ngrok
     
 EXPOSE ${PORT} ${NGROK_TUNNEL_PORT}
 
@@ -59,6 +65,8 @@ ENV LISTENER_AUTH_KEY=${LISTENER_AUTH_KEY}
 ENV PYTHONDONTWRITEBYTECODE=${PYTHONDONTWRITEBYTECODE} 
 
 ENV NGROK_TUNNEL_PORT=${NGROK_TUNNEL_PORT}
+ENV NGROK_AUTH_TOKEN=${NGROK_AUTH_TOKEN}
+
 #============================================================
 ENV DISCORD_APP_AUTH_TOKEN=${DISCORD_APP_AUTH_TOKEN}
 ENV DISCORD_APP_ID=${DISCORD_APP_ID}

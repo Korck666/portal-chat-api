@@ -27,10 +27,12 @@ class Config:
     PUBLIC_URL: str = os.environ.get("PUBLIC_URL", "localhost")
     LOCAL_HOST: str = os.environ.get("HOST", "0.0.0.0")
     EXPOSED_PORT: int = int(os.environ.get("PORT", 8000))
-
+    # NGROK ===============================================
     NGROK_TUNNEL_PORT: int = int(os.environ.get("NGROK_TUNNEL_PORT", 4040))
     NGROK_TUNNEL_URL: str = f"http://{LOCAL_HOST}:{NGROK_TUNNEL_PORT}/api/tunnels"
-
+    NGROK_AUTH_TOKEN: str = os.environ.get("NGROK_AUTH_TOKEN", "")
+    # =====================================================
+    
     LOG_FORMAT: str = os.environ.get("LOG_FORMAT", "%(asctime)s - %(name)s - %(levelname)s - %(message)s")
     LOG_DATE_FORMAT: str = os.environ.get("LOG_DATE_FORMAT", "%Y-%m-%d %H:%M:%S")
     LOG_FILE: str = os.environ.get("LOG_FILE", "portal-chat-api.log")

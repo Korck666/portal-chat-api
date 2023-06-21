@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends
 from models.chat_input import ChatInput
 from models.chat_output import ChatOutput
 from pydantic import config
-from services.auth import Authenticator
+from app.services.authenticator import Authenticator
 from services.openai import OpenAI
 from utils.config import Config
 
