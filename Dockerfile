@@ -1,6 +1,6 @@
 FROM tiangolo/uvicorn-gunicorn:python3.10
 
-ARG CHAT_SERVICE_URL="http://0.0.0.0:8000"
+ARG PUBLIC_URL="http://0.0.0.0"
 ARG OPENAI_API_KEY=""
 ARG OPENAI_ORG_ID=""
 ARG PINECONE_API_KEY=""
@@ -17,11 +17,16 @@ ARG PCAPI_MONGO_COLLECTION_USER="users"
 ARG PCAPI_MONGO_COLLECTION_LOGS="logs"
 ARG PCAPI_MONGO_URL="mongodb://mongo:auth@host:port"
 #===========================================================
+ARG NGROK_TUNNEL_PORT=4040
+#============================================================
+ARG DISCORD_APP_AUTH_TOKEN="not set"
+ARG DISCORD_APP_ID="not set"
+ARG DISCORD_APP_INTENTS=0
+ARG DISCORD_APP_PUBLIC_KEY="not set"
+ARG DISCORD_BOT_APP_INVITE_LINK="not set"
 
 ARG LISTENER_AUTH_KEY="internal api key"
 ARG PYTHONDONTWRITEBYTECODE
-
-
 
 LABEL key="portal-chat-api"
 
@@ -29,9 +34,9 @@ COPY requirements.txt /tmp/requirements.txt
 RUN pip install --upgrade pip && pip install --no-cache-dir -r /tmp/requirements.txt && \
     apt-get update && apt-get install -y git
     
-EXPOSE ${PORT}
+EXPOSE ${PORT} ${NGROK_TUNNEL_PORT}
 
-ENV CHAT_SERVICE_URL=${CHAT_SERVICE_URL}
+ENV PUBLIC_URL=${PUBLIC_URL}
 ENV OPENAI_API_KEY=${OPENAI_API_KEY}
 ENV OPENAI_ORG_ID=${OPENAI_ORG_ID}
 ENV PINECONE_API_KEY=${PINECONE_API_KEY}
@@ -52,6 +57,14 @@ ENV LISTENER_AUTH_KEY=${LISTENER_AUTH_KEY}
 
 # production it must be blank for performance
 ENV PYTHONDONTWRITEBYTECODE=${PYTHONDONTWRITEBYTECODE} 
+
+ENV NGROK_TUNNEL_PORT=${NGROK_TUNNEL_PORT}
+#============================================================
+ENV DISCORD_APP_AUTH_TOKEN=${DISCORD_APP_AUTH_TOKEN}
+ENV DISCORD_APP_ID=${DISCORD_APP_ID}
+ENV DISCORD_APP_INTENTS=${DISCORD_APP_INTENTS}
+ENV DISCORD_APP_PUBLIC_KEY=${DISCORD_APP_PUBLIC_KEY}
+ENV DISCORD_BOT_APP_INVITE_LINK=${DISCORD_BOT_APP_INVITE_LINK}
 
 COPY ./app /app
 

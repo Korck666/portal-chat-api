@@ -7,3 +7,9 @@ pymongo
 pyJWT
 pylint
 pytest
+discord
+fastapi_discord
+ujson
+msgpack
+python-dotenv
+

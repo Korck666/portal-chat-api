@@ -16,40 +16,46 @@
     <script>
       const socket = new WebSocket('ws://localhost:8000/ws');
       const messages = document.getElementById('messages');
-      let messageBuffer = '';
+      let response = null;
 
-      socket.addEventListener('open', (event) => {
+      addEventListener('open', (event) => {
         console.log('WebSocket connected');
       });
-      
+
       socket.addEventListener('message', (event) => {
-          const message = document.getElementById('response');
-          message.textContent += event.data;
-          if (event.data === '') {
-            message.style.color = 'green';
-            message.id = gettime().toString();
-            document.updateElementById('response', message);
+          response.textContent += event.data;
+          if (event.data === '' && response.textContent !== '') {
+            response.style.color = 'green';
+            response.id = getTime().toString();
             console.log('Message from server ', message.textContent);
-            document.getElementById('message').attributes.disabled = false;
-            document.getElementById('button').attributes.disabled = false;
+            document.getElementById('message').disabled = false;
+            document.getElementById('button').disabled = false;
           }
+          setTimeout(() => {
+          // code to execute after 100ms
+          }, 100);
+          
       });
 
       function sendMessage() {
-        inbox = document.getElementById('message');
-        button = document.getElementById('button');
-        inbox.attributes.disabled = true;
-        button.attributes.disabled = true;
-        //
-        const message = document.getElementById('messages').createElement('p', id='sent');
-        const m = message.textContent = inbox.value;
+        const inbox = document.getElementById('message');
+        const button = document.getElementById('button');
+        inbox.disabled = true;
+        button.disabled = true;
+
+        const message = document.createElement('p');
+        message.textContent = inbox.value;
         message.style.color = 'blue';
         inbox.value = '';
 
-        message = document.getElementById('messages').createElement('p', id='response');
-        message.style.color = 'orange';
+        response = document.createElement('p');
+       // messages.insertBefore(response, messages.childNodes[0]);
+        response.style.color = 'orange';
 
-        socket.send(m);
+        messages.appendChild(message);
+        messages.appendChild(response);
+
+        socket.send(JSON.stringify({message: message.textContent}));
       }
 
       const input = document.getElementById('message');
@@ -59,6 +65,10 @@
           sendMessage();
         }
       });
+
+      function getTime() {
+        return new Date().getTime();
+      }
     </script>
   </body>
 </html>

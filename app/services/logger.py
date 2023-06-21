@@ -1,49 +1,42 @@
 # app/services/logger.py
 
 import logging
-from typing import Optional
 
-import utils.config as config
+from typing import Optional
+from utils.config import Config
 from services.mongodb import MongoDB
 from services.mongodb_handler import MongoDBHandler
 
 
-class Logger():
+class Logger(logging.Logger):
     """
     Singleton class to handle logging.
-
-    Args:
-    None
-
-    Returns:
-    logging.Logger: The instantiated logger object.
     """
+    logger: Optional['Logger'] = None
+    config = Config()
+    mongodb = MongoDB()
 
-    _instance: Optional['Logger'] = None
-
-    def __new__(cls) -> logging.Logger:
-        if cls._instance is None:
-            cls._instance = super().__new__(cls)
-            cls.logger = logging.getLogger()
-            cls.config = config.Config()
-            cls.mongodb = MongoDB()
-            cls.logger.setLevel(cls.config.LOG_LEVEL)
-            cls.dbhandler = MongoDBHandler(
-                collection=cls.mongodb.collections[cls.config.DB_LOGS])
-            cls.dbhandler.setFormatter(
-                logging.Formatter(cls.config.LOG_FORMAT))
-            cls.logger.addHandler(cls.dbhandler)
-            cls.new_filehandler()
+    def __new__(cls) -> 'Logger':
+        if cls.logger is None:
+            cls.logger = super().__new__(cls)
+            cls.logger.__init__()
         return cls.logger
+
+    def __init__(self, name: str="System", level: int=config.LOG_LEVEL) -> None:
+        super().__init__(name, level)
+        self.dbhandler = MongoDBHandler(
+            collection=self.mongodb.collections[self.config.DB_LOGS])
+        self.dbhandler.setFormatter(
+            logging.Formatter(self.config.LOG_FORMAT))
+        self.addHandler(self.dbhandler)
+        self.new_filehandler()
 
     @classmethod
     def new_filehandler(cls) -> None:
+        cls.config = Config()
         cls.filehandler = logging.FileHandler(
             f"{cls.config.LOG_PATH}/{cls.config.LOG_FILE}")
         cls.filehandler.setFormatter(
             logging.Formatter(cls.config.LOG_FORMAT))
-        cls.logger.addHandler(cls.filehandler)
-        cls.logger.info("New log file.")
-
-    def __init__(self) -> None:
-        pass
+        cls.logger.addHandler(cls.filehandler) if cls.logger else None
+        cls.logger.info("New log file.") if cls.logger else None

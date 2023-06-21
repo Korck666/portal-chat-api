@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
       args:
         #use .env to load environment variables
-        - CHAT_SERVICE_URL=${CHAT_SERVICE_URL}
+        - PUBLIC_URL=${PUBLIC_URL}
         - OPENAI_API_KEY=${OPENAI_API_KEY}
         - OPENAI_ORG_ID=${OPENAI_ORG_ID}
           #MONGO DB SETTINGS ========================================
@@ -22,13 +22,23 @@ services:
         - PORT=${PORT}
         - PORTAL_CHAT_API_KEY=${PORTAL_CHAT_API_KEY}
         - PYTHONDONTWRITEBYTECODE=1
+        - ENV NGROK_TUNNEL_PORT=${NGROK_TUNNEL_PORT}
+        #============================================================
+        - ENV DISCORD_APP_AUTH_TOKEN=${DISCORD_APP_AUTH_TOKEN}
+        - ENV DISCORD_APP_ID=${DISCORD_APP_ID}
+        - ENV DISCORD_APP_INTENTS=${DISCORD_APP_INTENTS}
+        - ENV DISCORD_APP_PUBLIC_KEY=${DISCORD_APP_PUBLIC_KEY}
+        - ENV DISCORD_BOT_APP_INVITE_LINK=${DISCORD_BOT_APP_INVITE_LINK}
+
     container_name: portal-chat-api
     environment:
-      PORT: 8000
+      PORT: [8000,4040]
     expose:
       - 8000
+      - 4040
     ports:
       - "8000:8000"
+      - "4040:4040"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: "no"
