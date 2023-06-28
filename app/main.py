@@ -30,9 +30,8 @@ discord = DiscordOAuthClient(
 )  # scopes
 
 
-
 # Clean up cache
-Cleanup().cleanup_cache()
+# Cleanup().cleanup_cache()
 
 logger.info("Starting app...")
 
